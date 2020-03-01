@@ -1,15 +1,17 @@
 ArrayList<String> opStack = new ArrayList<String>();
 ArrayList<String> numStack = new ArrayList<String>();
 
-String input = " x ^ y / ( 5 * z ) + 10 ";
+String input = " x ^ y / ( 5 + z ) + 10 ";
 
 
 
 void setup() {
   println(convRPN(input));
+  ExpressionTree et = new ExpressionTree();
+  Node root = et.constructTree(convRPN(input).split(" "));
+  et.inorder(root);
   
 }
-
 
 public int getPrecendence(String n) {
   int prec = 1;
@@ -29,7 +31,6 @@ public String convRPN(String str) {
   ArrayList<String> queue = new ArrayList<String>();
   ArrayList<String> ops = new ArrayList<String>();
   String retStr = "";
-  String op;
   int curpos = 1;
   String temp;
   while((str.substring(curpos)).length() > 1) {
